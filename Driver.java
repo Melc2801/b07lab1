@@ -23,8 +23,8 @@ public class Driver {
         int[] e1 = {0, 1, 3};
         Polynomial p1 = new Polynomial(c1, e1);
 
-        double[] c2 = {-5, 2, -4, 5};
-        int[] e2 = {0, 1, 3, 4};
+        double[] c2 = {-6, 2, -5};
+        int[] e2 = {0, 1, 3};
         Polynomial p2 = new Polynomial(c2, e2);
 
         Polynomial file = new Polynomial(new File("TestFile.txt"));
@@ -35,17 +35,21 @@ public class Driver {
             );
         }
 
-        /*p2.saveToFile("TestFile.txt");
-        System.out.println("break1");
-        Polynomial added = p1.add(p2);
-        for (int i = 0; i < added.coefficients.length; i++) {
-            System.out.format("%.1fx^%d\n",
-                    added.coefficients[i],
-                    added.exponents[i]
-            );
-        }*/
+        System.out.println('\n');
+        //p2.saveToFile("TestFile.txt");
 
-        System.out.println("break");
+        Polynomial added = p1.add(p2);
+        if (added.coefficients != null) {
+            for (int i = 0; i < added.coefficients.length; i++) {
+                System.out.format("add: %.1fx^%d\n",
+                        added.coefficients[i],
+                        added.exponents[i]
+                );
+            }
+        }
+
+        System.out.println('\n');
+
         Polynomial multiplied = p1.multiply(p2);
         for (int i = 0; i < multiplied.coefficients.length; i++) {
             System.out.format("%.1fx^%d\n",
@@ -53,6 +57,19 @@ public class Driver {
                     multiplied.exponents[i]
             );
         }
+
+        System.out.println('\n');
+
+        Polynomial multipliedEmpty = p1.multiply(new Polynomial());
+        if (multipliedEmpty != null) {
+            for (int i = 0; i < multipliedEmpty.coefficients.length; i++) {
+                System.out.format("%.1fx^%d\n",
+                        multipliedEmpty.coefficients[i],
+                        multipliedEmpty.exponents[i]
+                );
+            }
+        }
+
     }
 
 }

@@ -10,8 +10,8 @@ public class Polynomial {
     int []exponents;
 
     public Polynomial() {
-        coefficients = new double[0];
-        exponents = new int[0];
+        coefficients = null;
+        exponents = null;
     }
 
     public Polynomial(double []coefficients, int []exponents) {
@@ -78,15 +78,22 @@ public class Polynomial {
                 size--;
             }
         }
-
-        //remove redundant terms (trailing)
-        return new Polynomial(
+        Polynomial added = new Polynomial(
                 Arrays.copyOfRange(result_coefficients, 0, size),
                 Arrays.copyOfRange(result_exponents, 0, size)
         );
+
+        if (added.coefficients[0] == 0) {
+            return new Polynomial();
+        }
+
+        //remove redundant terms (trailing)
+        return added;
     }
 
     Polynomial multiply(Polynomial polynomial) {
+        if (this.coefficients == null || polynomial.coefficients == null) return null;
+
         int callerLength = this.coefficients.length;
         int argumentLength = polynomial.coefficients.length;
 
